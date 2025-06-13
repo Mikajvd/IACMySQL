@@ -1,0 +1,31 @@
+#SPDX-License-Identifier: MIT-0
+---
+- name: Install Python MySQL dependency
+  apt:
+    name: python3-pymysql
+    state: present
+    update_cache: yes
+
+- name: Install MySQL
+  apt:
+    name: mysql-server
+    state: present
+    update_cache: yes
+  notify: Start mysql
+
+- name: Ensure MySQL is running
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Create DB user
+  mysql_user:
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: "*.*:ALL"
+    host: "%"
+    state: present
+# tasks file for roles/mysql

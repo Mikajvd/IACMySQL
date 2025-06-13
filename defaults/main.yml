@@ -1,0 +1,5 @@
+#SPDX-License-Identifier: MIT-0
+---
+mysql_user: dbuser
+mysql_password: dbpassword
+# defaults file for roles/mysql
